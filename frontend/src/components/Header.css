@@ -1,0 +1,238 @@
+.header {
+  background-color: #ecebeb;
+  color: white;
+  height: 25vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  
+
+    position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999; /* ensure it stays above other elements */
+}
+
+.company-logo {
+  height: 300px; /* adjust as needed */
+  width: auto;
+}
+
+.inide_header{
+    display: flex;
+flex-direction: column;
+font-style: normal;
+color:black;
+font-size: 12px;
+}
+
+
+ .header_icon_position_align {
+  display: flex;
+  flex-direction: column;
+  padding-right: 15vh;
+  gap: 0px;
+ 
+  align-items: flex-start; /* Start the column at the left */
+  position: relative;
+}
+
+
+.header-title {
+  font-size: 30px;
+  font-weight: bold;
+  /* padding:12vh;
+  margin-left:12px; */
+  letter-spacing: 0px;
+  transform: scaleX(1.3); /* Increase width by 1.5x */
+  display: inline-block;
+  font-style: italic;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.connect-btn {
+  background-color: #22c55e;
+  color: white;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.connect-btn:hover {
+  background-color: #16a34a;
+}
+
+.status-text {
+  font-size: 13px;
+  color: #cccccc;
+}
+
+
+
+.usb-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  margin: 20px;
+
+  font-family: sans-serif;
+}
+
+.usb-dropdown {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: rgb(245, 241, 241);
+  color: #333;
+  appearance: none;
+  min-width: 270px;
+}
+
+/* Custom toggle switch */
+/* .switch-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding-left: 60%;
+  user-select: none;
+} */
+ .switch-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+  padding-left: 0; /* Remove 60% padding */
+}
+
+.switch-container input {
+  display: none;
+}
+/* 
+.slider {
+  width: 36px;
+  height: 18px;
+  background-color: #ccc;
+  border-radius: 999px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.switch-container input:checked + .slider {
+  background-color: #4caf50;
+}
+
+.switch-container input:checked + .slider::before {
+  transform: translateX(18px);
+} */
+.header-slider {
+  width: 36px;
+  height: 18px;
+  background-color: #ccc;
+  border-radius: 999px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.header-slider::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.switch-container input:checked + .header-slider {
+  background-color: #4caf50;
+}
+
+.switch-container input:checked + .header-slider::before {
+  transform: translateX(18px);
+}
+
+.label-text {
+  font-size: 14px;
+  color: #333;
+  
+}
+
+
+.connect-image-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: flex-start;
+  height: 22vh; /* Ensure same height for each block */
+  width: 16vh;  /* Optional: consistent width */
+  margin-top: 10px;
+}
+
+.connect-image-link p {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+ 
+}
+
+.connect-image {
+  height: 15vh;
+  width: 15vh;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+ 
+}
+
+.connect-image:hover {
+  transform: scale(1.05);
+}
+
+/* Status Image */
+.status-image {
+  height: 11vh;
+  width: 16vh;
+    margin-bottom: 4px;
+}
+
+.connect-image,
+.status-image {
+  height: 14vh;
+  width: 14vh;
+  object-fit: contain;
+  margin-bottom: 1px; /* Add margin below image for consistent spacing before text */
+}
+
+.autoconnect-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* Push to right side */
+  margin-top: 8px;
+}
