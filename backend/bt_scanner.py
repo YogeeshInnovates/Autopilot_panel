@@ -5,6 +5,7 @@ async def scan_bluetooth():
     devices = []
     try:
         found = await BleakScanner.discover(timeout=5.0)
+        
         for d in found:
             devices.append({
                 "type": "bluetooth",

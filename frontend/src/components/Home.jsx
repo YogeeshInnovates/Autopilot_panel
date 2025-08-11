@@ -19,6 +19,7 @@ function Home({selectedPage, setSelectedPage }) {
         return <Documentation />;
    case 'option':
         return <Option />;
+        // return <Option changeLanguage={changeLanguage} />;
       case 'firmware':
   return <FirmwareFlasher />;
 

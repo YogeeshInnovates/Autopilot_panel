@@ -160,10 +160,13 @@
 // export default FirmwareFlasher;
 
 
-import React from 'react';
 import './FirmwareFlasher.css';
-
+import React, { useState,useEffect } from 'react';
 function FirmwareFlasher() {
+
+   const [expertMode, setExpertMode] = useState(false);
+const[reboot,setreboot]=useState(true);
+const [releasecandidates,setreleasecandidates]=useState(false);
   return (
     <div>
       
@@ -182,19 +185,37 @@ function FirmwareFlasher() {
       <div className="flasher-left">
         <div className="option-block">
           <label className="toggle-switch">
-            <input type="checkbox" />
+           <input 
+            type="checkbox" 
+            checked={expertMode}
+            onChange={() => setExpertMode(!expertMode)} 
+          />
             <span className="slider" />
           </label>
           <span>Enable Expert Mode</span>
         </div>
 
+
+
         <div className="option-block">
           <label className="toggle-switch">
-            <input type="checkbox" />
+            <input type="checkbox" checked={releasecandidates} onChange={()=>setreleasecandidates(!releasecandidates)} />
             <span className="slider" />
           </label>
           <span>Show Release Candidates</span>
         </div>
+
+{releasecandidates && (
+
+  <select className="dropdown">
+          <option>Release</option>
+          <option>Release & Release Candidate</option>
+           <option>Development</option>
+        </select>
+
+)}
+
+
 
         <select className="dropdown">
           <option>Choose a Board</option>
@@ -205,7 +226,68 @@ function FirmwareFlasher() {
           <option>Choose a Firmware version</option>
           <option>Version 1</option>
         </select>
+
+
+        
+    {expertMode && (
+      <>
+       <div className="option-block">
+          <label className="toggle-switch">
+           <input 
+            type="checkbox" 
+            checked={reboot}
+            onChange={() => setreboot(!reboot)} 
+          />
+            <span className="slider" />
+          </label>
+          <span>No reboot sequence</span>
+        </div>
+
+
+{reboot &&(
+    <div className="option-block">
+          <label className="toggle-switch">
+            <input type="checkbox" />
+            <span className="slider" />
+          </label>
+          <span>Flash on Connect</span>
+        </div>
+)}
+      
+
+        
+        <div className="option-block">
+          <label className="toggle-switch">
+            <input type="checkbox" />
+            <span className="slider" />
+          </label>
+          <span>Full chip erase</span>
+        </div>
+
+          <div className="option-block">
+          <label className="toggle-switch">
+            <input type="checkbox" />
+            <span className="slider" />
+          </label>
+          <span>Manual baud rate</span>
+        </div>
+        <select className="dropdownbaud">
+          <option>19200</option>
+          <option>19200</option>
+            <option>28800</option>
+              <option>38400</option>
+                <option>57600</option>
+                  <option>115200</option>
+                    <option>230400</option>
+                       <option>256000</option>
+                          <option>460800</option>
+                             <option>921600</option>
+        </select>
+        </>
+      )}
       </div>
+
+
 
       {/* Right Panel */}
       <div className="flasher-right-horizontal">

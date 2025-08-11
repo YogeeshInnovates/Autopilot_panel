@@ -236,3 +236,44 @@ font-size: 12px;
   justify-content: flex-end; /* Push to right side */
   margin-top: 8px;
 }
+
+
+
+.connect-modal {
+  position: fixed;
+  top: 10px;
+  left: 10vw;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;          /* you can adjust */
+  width: 30%; 
+  height:50%;          
+  color:black;/* bigger width */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+.connect-modal h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.connect-modal ul {
+  max-height: 300px;      /* bigger height for scroll */
+  overflow-y: auto;
+  padding-left: 20px;
+}
+
+.connect-modal li {
+  margin-bottom: 8px;
+}
+
+.connect-modal button {
+  margin-right: 10px;
+}
+
+.connect-modal .close-button {
+  margin-top: 10px;
+  width: 100%;
+}

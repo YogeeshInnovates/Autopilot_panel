@@ -100,3 +100,21 @@ input:checked + .slider:before {
   font-size: 14px;
   margin-right: 10px;
 }
+
+
+
+/* Dark Theme Override */
+body.dark-theme {
+  background-color: #121212;
+  color: white;
+}
+
+body.dark-theme .settings-panel {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-theme .setting-option span,
+body.dark-theme .section-title {
+  color: white;
+}

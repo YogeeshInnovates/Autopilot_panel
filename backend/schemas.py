@@ -11,3 +11,9 @@ class DeviceInfo(BaseModel):
     address: Optional[str] = None  # Bluetooth address
     name: Optional[str] = None
 
+class PairRequest(BaseModel):
+    address: str
+
+
+class BluetoothConnectRequest(BaseModel):
+    address: str
