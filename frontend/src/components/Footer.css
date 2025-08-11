@@ -14,3 +14,13 @@
   border-top: 1px solid #ccc;
   z-index: 999;
 }
+/* Footer.css */
+
+/* ... (existing footer styles) ... */
+
+/* Dark theme styles for the footer */
+body.dark-theme .fixed-footer {
+  background-color: #1e1e1e; /* Dark background */
+  border-top: 1px solid #333;
+  color: white; /* Light text color */
+}

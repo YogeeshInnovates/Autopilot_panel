@@ -1,5 +1,6 @@
+/* Home.css */
 
-
+/* Light Theme Styles (Default) */
 .layout-container {
   display: flex;
   height: 100vh;
@@ -10,18 +11,9 @@
   border-radius: 4px;
 }
 
-
-/* .left-panel {
-  width: 18%;
-  background-color: #f2f2f2; 
-  padding: 10px;
-  box-sizing: border-box;
-  height:45%;
-  border-radius: 2px;
-} */
 .left-panel {
   position: fixed;
-  top: 32vh; /* below the fixed header */
+  top: 32vh;
   left: 10;
   width: 18%;
   height: 45%;
@@ -31,31 +23,34 @@
   border-radius: 12px;
 }
 
-
-.welcomenote{
-   display: flex; /* This enables flexbox */
-  align-items: center; /* Vertically centers the content */
-  justify-content: center; /* Horizontally centers the content */
+.welcomenote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 2px;
-    height:6vh;
-    color:orange;
-    
-    background-color: rgb(243, 235, 191);
-    border-radius: 16px;
+  height: 6vh;
+  color: orange;
+  background-color: rgb(243, 235, 191);
+  border-radius: 16px;
 }
 
 .list_of_item {
-    margin-top: 18px;
- padding: 12px;
-
+  margin-top: 18px;
+  padding: 12px;
 }
 
 .list_of_item p {
   display: flex;
   align-items: center;
-  gap:12px; /* spacing between icon and text */
-
+  gap: 12px;
   margin-bottom: 16px;
+  cursor: pointer; /* Add a pointer for better user experience */
+}
+
+.list_of_item p.active {
+  background-color: #fbc02d;
+  border-radius: 8px;
+  font-weight: bold;
 }
 
 .icon {
@@ -64,25 +59,42 @@
   object-fit: contain;
 }
 
-
-/* .right-panel {
-  width: 83%;
-  background-color: #ffffff; 
-  padding: 20px;
-  box-sizing: border-box;
-} */
-
-
 .right-panel {
-  margin-left: 18%; /* Leaves space for the fixed left panel */
-  margin-top: 25vh;  /* Leaves space below the fixed header */
+  margin-left: 18%;
+  margin-top: 25vh;
   width: 82%;
   background-color: #ffffff;
   padding: 20px;
   box-sizing: border-box;
   border-radius: 12px;
-
-  /* Make it scrollable if content is long */
-  max-height: calc(100vh - 32vh - 60px); /* viewport - header - footer height if footer is 60px */
+  max-height: calc(100vh - 32vh - 60px);
   overflow-y: auto;
+}
+
+/* ------------------------------------ */
+
+/* 🟢 Dark Mode Styles (Additions) 🟢 */
+
+body.dark-theme .left-panel {
+  background-color: #1e1e1e;
+  color: white;
+}
+
+body.dark-theme .welcomenote {
+  background-color: #bb86fc; /* A distinct dark mode color */
+  color: black;
+}
+
+body.dark-theme .list_of_item p {
+  color: white;
+}
+
+body.dark-theme .list_of_item p.active {
+  background-color: #333;
+  color: #bb86fc; /* Highlight color for active link */
+}
+
+body.dark-theme .right-panel {
+  background-color: #121212;
+  color: white;
 }

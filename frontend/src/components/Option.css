@@ -118,3 +118,88 @@ body.dark-theme .setting-option span,
 body.dark-theme .section-title {
   color: white;
 }
+ /* Option.css */
+
+.main_content {
+  background-color: #f0f0f0; /* Light theme background */
+  color: #333; /* Light theme text color */
+}
+
+/* Dark theme styles */
+.main_content.dark-theme {
+  background-color: #121212; /* Dark theme background */
+  color: #e0e0e0; /* Dark theme text color */
+}
+
+.main_content.dark-theme .settings-panel {
+  background-color: #1e1e1e; /* Darker panel background */
+  border-color: #333;
+}
+
+.main_content.dark-theme .section-title {
+  color: #bb86fc; /* Purple accent for titles */
+}
+
+.main_content.dark-theme .setting-option span,
+.main_content.dark-theme .inline-setting span {
+  color: #e0e0e0; /* Light text for options */
+}
+
+.main_content.dark-theme select {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+/* Add other dark theme styles for any other elements you want to change */
+/* Option.css */
+
+/* ... (existing styles) ... */
+
+/* Dark theme styles for the whole page */
+body.dark-theme {
+  background-color: #121212;
+  color: white;
+}
+
+/* Dark theme styles for the content panels */
+body.dark-theme .settings-panel {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-theme .section-title {
+  color: #e0e0e0;
+  background: #bb86fc;
+}
+
+body.dark-theme .setting-option span,
+body.dark-theme .inline-setting span {
+  color: #e0e0e0;
+}
+
+body.dark-theme select {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+/* 🟢 ADDED: Dark mode styles for the sidebar */
+body.dark-theme .sidebar {
+  background-color: #1e1e1e;
+}
+
+body.dark-theme .sidebar a,
+body.dark-theme .sidebar p {
+  color: #e0e0e0;
+}
+
+body.dark-theme .sidebar .active {
+  background-color: #333; /* A different shade to highlight the active link */
+}
+
+/* 🟢 Ensure the main content container also gets dark background */
+body.dark-theme .main_content {
+  background-color: #121212;
+  color: white;
+}

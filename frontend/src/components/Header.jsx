@@ -231,9 +231,9 @@ function pairDevice(device) {
   <option value="" disabled>
     Select your device
   </option>
-  <option value="usb">Connect USB device</option>
-  <option value="bluetooth">Connect Bluetooth device</option>
-  <option value="dfu">Connect DFU device</option>
+  <option value="usb">---I can't find USB device---</option>
+  <option value="bluetooth">---I can't find Bluetooth device ---</option>
+  <option value="dfu">---I can't find DFU device---</option>
 
   {pairedDevice && (
     <option value={`paired:${pairedDevice.address}`}>

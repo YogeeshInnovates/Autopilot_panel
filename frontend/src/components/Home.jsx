@@ -17,11 +17,11 @@ function Home({selectedPage, setSelectedPage }) {
         return <Defaultpage />
       case 'documentation':
         return <Documentation />;
-   case 'option':
+      case 'option':
         return <Option />;
         // return <Option changeLanguage={changeLanguage} />;
       case 'firmware':
-  return <FirmwareFlasher />;
+      return <FirmwareFlasher />;
 
       default:
         return <p>Welcome! Select an option from the left.</p>;
@@ -33,10 +33,17 @@ function Home({selectedPage, setSelectedPage }) {
   <div className="left-panel">
     {/* Left side content goes here */}
     <div className='welcomenote'>
- <p>Wellcome</p>
+ <p>Welcome</p>
     </div>
 
 <div className="list_of_item">
+  <p
+            onClick={() => setSelectedPage('defaultpage')}
+            className={selectedPage === 'defaultpage' ? 'active' : ''}
+          >
+            <img src="https://res.cloudinary.com/dri6pzxgx/image/upload/v1754671362/2800747-200_hvvypk.png" className="icon" />
+            Home
+          </p>
     <p onClick={() => setSelectedPage('privacy')}>
             <img src="https://res.cloudinary.com/dri6pzxgx/image/upload/v1754671362/2800747-200_hvvypk.png" className="icon" />
             Privacy Policy

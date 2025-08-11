@@ -277,3 +277,37 @@ font-size: 12px;
   margin-top: 10px;
   width: 100%;
 }
+/* Header.css */
+
+/* ... (existing header styles) ... */
+
+/* Dark theme styles for the header */
+body.dark-theme .header {
+  background-color: #1e1e1e; /* Dark background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid #333;
+}
+
+body.dark-theme .header-title span,
+body.dark-theme .header p,
+body.dark-theme .header a p,
+body.dark-theme .header .label-text {
+  color: #e0e0e0 !important; /* Force light text color for all content */
+}
+
+/* Keep the orange color for the "AUTO" text */
+body.dark-theme .header-title span:first-child {
+  color: orange !important;
+}
+
+/* Style the dropdown menu for dark mode */
+body.dark-theme .usb-dropdown {
+  background-color: #333;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+/* Style the auto-connect toggle text */
+body.dark-theme .autoconnect-wrapper .label-text {
+  color: white;
+}
