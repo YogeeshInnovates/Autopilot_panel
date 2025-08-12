@@ -3,23 +3,51 @@ import React, { useState, useEffect,useRef } from 'react';
 import './Option.css';
 
 function Option() {
-  const [settings, setSettings] = useState({
-    reopenLastTab: false,
-    disableInternet: false,
-    optOutStats: false,
-    advancedCLI: true,
-    manualConnection: false,
-    virtualConnection: false,
-    legacyRendering: false,
-    darkTheme: "Auto", // Auto, on,off
-    devTools: false,
-    showNotifications: false,
-    backup: "Backup enabled",
-    language: "System Default",
-    showSerialDevices: false,
-    cliOnlyMode: false,
-    showWarnings: false
-  });
+  
+
+  // Load settings from localStorage or use defaults
+  const getInitialSettings = () => {
+    try {
+      const storedSettings = localStorage.getItem('appSettings');
+      return storedSettings ? JSON.parse(storedSettings) : {
+        reopenLastTab: false,
+        disableInternet: false,
+        optOutStats: false,
+        advancedCLI: true,
+        manualConnection: false,
+        virtualConnection: false,
+        legacyRendering: false,
+        darkTheme: "Auto", // Auto, on, off
+        devTools: false,
+        showNotifications: false,
+        backup: "Backup enabled",
+        language: "System Default",
+        showSerialDevices: false,
+        cliOnlyMode: false,
+        showWarnings: false
+      };
+    } catch (error) {
+      console.error("Failed to load settings from localStorage:", error);
+      return {
+        reopenLastTab: false,
+        disableInternet: false,
+        optOutStats: false,
+        advancedCLI: true,
+        manualConnection: false,
+        virtualConnection: false,
+        legacyRendering: false,
+        darkTheme: "Auto",
+        devTools: false,
+        showNotifications: false,
+        backup: "Backup enabled",
+        language: "System Default",
+        showSerialDevices: false,
+        cliOnlyMode: false,
+        showWarnings: false
+      };
+    }
+  };
+  const [settings, setSettings] = useState(getInitialSettings);
   const mainContentRef = useRef(null);
 
   // Apply dark theme when setting changes
@@ -34,20 +62,24 @@ function Option() {
   //   }
   // }, [settings.darkTheme]);
 useEffect(() => {
-    if (mainContentRef.current) {
-      if (settings.darkTheme === "on") {
-        // mainContentRef.current.classList.add("dark-theme");
-        document.body.classList.add("dark-theme");
-      } else {
-        // Disable or Auto
-        //mainContentRef.current.classList.remove("dark-theme");
-        document.body.classList.remove("dark-theme");
-      }
+    // Save settings to localStorage whenever they change
+    try {
+      localStorage.setItem('appSettings', JSON.stringify(settings));
+    } catch (error) {
+      console.error("Failed to save settings to localStorage:", error);
     }
-  }, [settings.darkTheme]);
+
+    //  Apply the dark theme based on the current state
+    if (settings.darkTheme === "on") {
+      document.body.classList.add("dark-theme");
+    } else {
+      document.body.classList.remove("dark-theme");
+    }
+  }, [settings]); // The effect now depends on the entire 'settings' object.
+
   // Generic toggle for checkboxes
   const toggleSetting = (key) => {
-    setSettings((prev) => ({ ...prev, [key]: !prev[[key]] }));
+    setSettings((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   // Handle select changes
