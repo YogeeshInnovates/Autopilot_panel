@@ -32,11 +32,11 @@ function Home({selectedPage, setSelectedPage }) {
    <div className="layout-container">
   <div className="left-panel">
     {/* Left side content goes here */}
-    <div className='welcomenote'>
+    <div className='welcomenote' onClick={() => setSelectedPage('defaultpage')}>
  <p>Wellcome</p>
     </div>
 
-<div className="list_of_item">
+<div className="list_of_item" >
     <p onClick={() => setSelectedPage('privacy')}>
             <img src="https://res.cloudinary.com/dri6pzxgx/image/upload/v1754671362/2800747-200_hvvypk.png" className="icon" />
             Privacy Policy
