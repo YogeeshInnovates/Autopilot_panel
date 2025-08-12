@@ -24,7 +24,7 @@ function Home({selectedPage, setSelectedPage }) {
       return <FirmwareFlasher />;
 
       default:
-        return <p>Welcome! Select an option from the left.</p>;
+        return <Defaultpage />;
     }
   };
   
@@ -33,7 +33,7 @@ function Home({selectedPage, setSelectedPage }) {
   <div className="left-panel">
     {/* Left side content goes here */}
     <div className='welcomenote'>
- <p>Welcome</p>
+ <p onClick={() => setSelectedPage('defaultpage')}>Welcome</p>
     </div>
 
 <div className="list_of_item">
