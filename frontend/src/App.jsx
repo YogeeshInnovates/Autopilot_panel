@@ -9,7 +9,7 @@ import './App.css'; // If you use a global layout file
 
 
 function App() {
-   const [selectedPage, setSelectedPage] = useState('option');
+   const [selectedPage, setSelectedPage] = useState('defaultpage');
 
 
   
