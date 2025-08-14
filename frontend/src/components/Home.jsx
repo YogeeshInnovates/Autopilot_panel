@@ -6,6 +6,7 @@ import Option from './Option';
 import Defaultpage from './Defaultpage';
 import FirmwareFlasher from './FirmwareFlasher';
 import './Home.css';
+import { DeviceProvider } from './DeviceContext';
 function Home({selectedPage, setSelectedPage }) {
 //  const [selectedPage, setSelectedPage] = useState('privacy');
 
@@ -29,10 +30,11 @@ function Home({selectedPage, setSelectedPage }) {
   };
   
   return (
-   <div className="layout-container">
-  <div className="left-panel">
+    <DeviceProvider>
+     <div className="layout-container">
+      <div className="left-panel">
     {/* Left side content goes here */}
-    <div className='welcomenote'>
+     <div className='welcomenote'>
  <p onClick={() => setSelectedPage('defaultpage')}>Welcome</p>
     </div>
 
@@ -72,7 +74,7 @@ function Home({selectedPage, setSelectedPage }) {
 </div>
 
 </div>
-
+</DeviceProvider>
   );
 }
 

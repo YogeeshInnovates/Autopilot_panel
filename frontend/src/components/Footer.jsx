@@ -1,13 +1,21 @@
 // src/components/Footer.js
-import React from 'react';
+import React,{ useContext} from 'react';
 import './Footer.css';
+import { DeviceContext } from './DeviceContext.jsx';
 
 function Footer() {
+  const { isConnected, deviceName, deviceLogs } = useContext(DeviceContext);
   return (
     <div className="fixed-footer">
       <span>
-        Port utilization: D:0% U:0% | Packet error: 0 | I2C error: 0 | Cycle Time: 0 | CPU Load: 0%
+        {/* UPDATED: Display connection status */}
+        {isConnected ? `Connected: ${deviceName}` : "Disconnected"}
       </span>
+      <div className="footer-logs">
+        {deviceLogs.map((log, index) => (
+          <p key={index}>{log}</p>
+        ))}
+      </div>
       <span>
         Configurator: 11.0.0 (a80b170)
       </span>

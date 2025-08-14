@@ -1,8 +1,9 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect,useContext } from 'react';
 import './Header.css'; // Make sure this CSS file is in the same folder
 import { Link } from "react-router-dom";
 
 import FirmwareFlasher from './FirmwareFlasher';
+import { DeviceContext } from './DeviceContext.jsx';
 function Header({ setSelectedPage }) {
   const [autoConnect, setAutoConnect] = useState(false);
  
@@ -23,6 +24,7 @@ const [pairedDeviceAddress, setPairedDeviceAddress] = useState(null);
 
 const [pairedDevice, setPairedDevice] = useState(null);
 
+const { isConnected, connectToDevice, disconnectDevice, deviceName, addLog } = useContext(DeviceContext);
 
 
 
@@ -58,6 +60,7 @@ async function fetchDevices(type) {
         address: device.id, // No address in WebBluetooth, using ID
         gatt: device.gatt
       }]);
+      addLog(`Paired with Bluetooth device: ${device.name}`);
     } 
     else if (type === 'usb') {
       const device = await navigator.usb.requestDevice({ filters: [] }); // No filters → list all
@@ -71,10 +74,12 @@ async function fetchDevices(type) {
     else if (type === 'dfu') {
       alert('DFU mode detection needs special handling.');
       setDevices([]);
+      addLog(`${type} scan error: ${error.message}`);
     }
   } catch (error) {
     console.error(`${type} scan error:`, error);
     setDevices([]);
+    addLog(`${type} scan error: ${error.message}`);
   }
 }
 
@@ -82,84 +87,93 @@ async function fetchDevices(type) {
 
 
 
-async function openConnectModal(type) {
-  try {
-    if (type === "bluetooth") {
-      const device = await navigator.bluetooth.requestDevice({
-        acceptAllDevices: true,
-        optionalServices: ['battery_service']
-      });
-      setSelectedDevice({
-        name: device.name,
-        address: device.id,
-        gatt: device.gatt
-      });
-      setPairedDevice({
-        name: device.name,
-        address: device.id,
-        gatt: device.gatt
-      });
-      alert(`Paired with Bluetooth device: ${device.name}`);
-    } 
-    else if (type === "usb") {
-      const device = await navigator.usb.requestDevice({ filters: [] });
-      setSelectedDevice({
-        product: device.productName,
-        vendorId: device.vendorId,
-        productId: device.productId,
-        device
-      });
-      setPairedDevice({
-        product: device.productName,
-        vendorId: device.vendorId,
-        productId: device.productId,
-        device
-      });
-      alert(`Paired with USB device: ${device.productName}`);
-    }
-  } catch (error) {
-    console.error(`${type} scan error:`, error);
-  }
-}
+// async function openConnectModal(type) {
+//   try {
+//     if (type === "bluetooth") {
+//       const device = await navigator.bluetooth.requestDevice({
+//         acceptAllDevices: true,
+//         optionalServices: ['battery_service']
+//       });
+//       setSelectedDevice({
+//         name: device.name,
+//         address: device.id,
+//         gatt: device.gatt
+//       });
+//       setPairedDevice({
+//         name: device.name,
+//         address: device.id,
+//         gatt: device.gatt
+//       });
+//       alert(`Paired with Bluetooth device: ${device.name}`);
+//     } 
+//     else if (type === "usb") {
+//       const device = await navigator.usb.requestDevice({ filters: [] });
+//       setSelectedDevice({
+//         product: device.productName,
+//         vendorId: device.vendorId,
+//         productId: device.productId,
+//         device
+//       });
+//       setPairedDevice({
+//         product: device.productName,
+//         vendorId: device.vendorId,
+//         productId: device.productId,
+//         device
+//       });
+//       alert(`Paired with USB device: ${device.productName}`);
+//     }
+//   } catch (error) {
+//     console.error(`${type} scan error:`, error);
+//   }
+// }
 
-  function closeConnectModal() {
-    setShowConnectModal(false);
-    setConnectType(null);
-    setDevices([]);
-  }
+//   function closeConnectModal() {
+//     setShowConnectModal(false);
+//     setConnectType(null);
+//     setDevices([]);
+//   }
 
 
 
 async function handleConnectClick() {
-  if (!selectedDevice) {
-    alert("No device paired! Please pair a device first.");
-    return;
-  }
+        // UPDATED: If already connected, disconnect and log the event.
+        if (isConnected) {
+            disconnectDevice();
+            addLog(`Disconnected from ${deviceName}`);
+            return;
+        }
 
-  try {
-    if (connectType === 'bluetooth' || selectedDevice.gatt) {
-      const server = await selectedDevice.gatt.connect();
-      alert(`Connected to Bluetooth device: ${selectedDevice.name || selectedDevice.address}`);
-      console.log('Bluetooth GATT Server:', server);
-    } 
-    else if (connectType === 'usb' || selectedDevice.device) {
-      const dev = selectedDevice.device;
-      await dev.open();
-      if (dev.configuration === null) {
-        await dev.selectConfiguration(1);
-      }
-      await dev.claimInterface(0);
-      alert(`Connected to USB device: ${selectedDevice.product}`);
-      console.log('USB Device:', dev);
-    } 
-    else {
-      alert('Unknown device type.');
+        // UPDATED: Check for a paired device before attempting connection.
+        if (!pairedDevice) {
+            addLog("No device paired! Please pair a device first.");
+            return;
+        }
+
+        try {
+            // UPDATED: Use the paired device info to establish a connection.
+            if (pairedDevice.gatt) {
+                const server = await pairedDevice.gatt.connect();
+                connectToDevice(pairedDevice.name);
+                addLog(`Connected to Bluetooth device: ${pairedDevice.name}`);
+                console.log('Bluetooth GATT Server:', server);
+            } else if (pairedDevice.device) {
+                const dev = pairedDevice.device;
+                await dev.open();
+                if (dev.configuration === null) {
+                    await dev.selectConfiguration(1);
+                }
+                await dev.claimInterface(0);
+                connectToDevice(pairedDevice.product);
+                addLog(`Connected to USB device: ${pairedDevice.product}`);
+                console.log('USB Device:', dev);
+            } else {
+                addLog('Unknown device type.');
+            }
+        } catch (e) {
+            addLog("Connection failed: " + e.message);
+        }
     }
-  } catch (e) {
-    alert("Connection failed: " + e.message);
-  }
-}
-
+    
 
 
 function pairDevice(device) {
@@ -219,9 +233,9 @@ function pairDevice(device) {
     const val = e.target.value;
 
     if (val === "usb" || val === "bluetooth" || val === "dfu") {
-      openConnectModal(val);
+      fetchDevices(val);
     } else if (val.startsWith("paired:")) {
-      const addr = val.replace("paired:", "");
+      // const addr = val.replace("paired:", "");
       handleConnectClick(addr); // directly try to connect
     }
 

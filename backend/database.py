@@ -1,19 +1,18 @@
-
+import os
 from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base,sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker
 
-# MySQL connection string
-# Format: mysql+mysqlconnector://<username>:<password>@<host>/<database_name>
-DATA_BASE_URL="mysql+pymysql://root:mysql%402025fastapi@localhost/autopilot"
+DATA_BASE_URL = os.getenv(
+    "DATABASE_URL", 
+    "mysql+pymysql://root:tharun@localhost/betaflight_configurator"
+)
 
-engine=create_engine(DATA_BASE_URL)
-sessionlocal=sessionmaker(bind=engine)
-Base=declarative_base()
-
-
+engine = create_engine(DATA_BASE_URL)
+SessionLocal = sessionmaker(bind=engine)
+Base = declarative_base()
 
 def get_db():
-    db=sessionlocal()
+    db = SessionLocal()
     try:
         yield db
     finally:
